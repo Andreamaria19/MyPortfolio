@@ -1,6 +1,232 @@
-<html>
-<body style="background: #121212; color: white;">
-    <h1>Hello, I am {{ my_name }}</h1>
-    <p>This is my first Python website!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Creative Developer</title>
+    <style>
+        :root {
+            --bg: #0b0f1a;
+            --surface: #161b2b;
+            --accent: #6366f1; /* Indigo accent */
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        nav {
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(11, 15, 26, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid #232936;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #1e293b 0%, #0b0f1a 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 50px 10%;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid #232936;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+}
+
+/* Skills Tags */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.skill-tag {
+    background: #232936;
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent);
+}
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="font-weight: bold; font-size: 1.2rem;">MY PORTFOLIO.</div>
+        <div>
+            <!--/<a href="#" style="color: var(--text-main); text-decoration: none; margin-left: 20px;">Linkedln</a> <a href="#" style="color: var(--text-main); text-decoration: none; margin-left: 20px;">Github</a>-->
+            <a href="https://www.linkedin.com/in/andrea-maria-983220380" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   style="color: var(--text-main); text-decoration: none; margin-left: 20px;">
+   LinkedIn
+</a>
+            <a href="https://www.github.com/Andreamaria19"
+   target="_blank" 
+   rel="noopener noreferrer" 
+   style="color: var(--text-main); text-decoration: none; margin-left: 20px;">
+   Github
+</a>
+            
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Hello! This is Andrea. Welcome to my Portfolio</h1>
+        <p style="color: var(--text-dim);">An aspiring IT professional focused on turning ideas into functional and reliable software.</p>
+        <a href="#work" class="btn">View My Work</a>
+    </section>
+
+    <section id="work" class="project-grid">
+   <div class="project-card">
+    <h3 style="color: var(--accent);">CERTIFICATIONS</h3>
+    <p style="color: var(--text-dim);">Official credentials and achievements.</p>
+    
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="btn" onclick="openModal('Frontend.jpg')" style="border: none; cursor: pointer;">Cert 1</button>
+        <button class="btn" onclick="openModal('Github.jpeg')" style="border: none; cursor: pointer;">Cert 2</button>
+    </div>
+</div>
+
+    <div class="project-card">
+        <h3 style="color: var(--accent);">SKILLS</h3>
+        <p style="color: var(--text-dim);">Technologies acquired.</p>
+        <div class="skills-container">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Git</span>
+        </div>
+    </div>
+        <div id="certModal" class="modal" onclick="this.style.display='none'">
+    <img class="modal-content" id="modalImg">
+</div>
+</section>
+
+
+   <section id="contact" style="padding: 50px 10%; background: var(--surface);">
+    <h2 style="text-align: center; color: var(--accent);">Get In Touch</h2>
+    <form id="contactForm" style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+        <input type="text" id="name" placeholder="Your Name" required 
+               style="padding: 12px; border-radius: 8px; border: 1px solid #232936; background: var(--bg); color: white;">
+        
+        <input type="email" id="email" placeholder="Your Email" required 
+               style="padding: 12px; border-radius: 8px; border: 1px solid #232936; background: var(--bg); color: white;">
+        
+        <textarea id="message" placeholder="Your Message" rows="5" required 
+                  style="padding: 12px; border-radius: 8px; border: 1px solid #232936; background: var(--bg); color: white;"></textarea>
+        
+        <button type="submit" class="btn" style="border: none; cursor: pointer;">Send Message</button>
+    </form>
+    <p id="responseMessage" style="text-align: center; margin-top: 15px;"></p>
+</section>
+
+<script>
+    // MODAL LOGIC
+    function openModal(imgSrc) {
+        const modal = document.getElementById('certModal');
+        const modalImg = document.getElementById('modalImg');
+        
+        modalImg.src = imgSrc; 
+        modal.style.display = 'flex';
+
+        // Error handling if image is missing
+        modalImg.onerror = function() {
+            alert("Check your filename! Could not find: " + imgSrc);
+            modal.style.display = 'none';
+        };
+    }
+
+    // CONTACT FORM LOGIC
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                document.getElementById('responseMessage').innerText = "Message sent successfully!";
+                document.getElementById('contactForm').reset();
+            } else {
+                document.getElementById('responseMessage').innerText = "Error sending message.";
+            }
+        } catch (err) {
+            document.getElementById('responseMessage').innerText = "Server not running, but the UI works!";
+        }
+    });
+</script>
 </body>
 </html>
