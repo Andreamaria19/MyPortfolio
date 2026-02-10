@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../')));
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
-    user: "34Z7u7R6aGsvz2W.root",    // <--- MUST use process.env
+    user: process.env.DB_USER,    // <--- MUST use process.env
     password: process.env.DB_PASS,  // <--- MUST use process.env
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 4000,
@@ -28,10 +28,11 @@ const db = mysql.createConnection({
 
 db.connect(err => {
     if (err) {
-        console.error("❌ TiDB Connection Error:", err.message);
-        // The server will still run, but DB features won't work
+        // This will print the username to the logs so we can see if it's actually working
+        console.error("❌ Connection failed for user:", process.env.DB_USER);
+        console.error("❌ Error Message:", err.message);
     } else {
-        console.log("✅ Connected to TiDB Database");
+        console.log("✅ SUCCESS! Connected as:", process.env.DB_USER);
     }
 });
 
@@ -53,6 +54,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
 
 
 
