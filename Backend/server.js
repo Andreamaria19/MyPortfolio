@@ -16,16 +16,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../')));
 
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,    // <--- MUST use process.env
-    password: process.env.DB_PASS,  // <--- MUST use process.env
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 4000,
+    host: "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
+    user: "34Z7u7R6aGsvz2W.root", 
+    password: "41izUCOXmZOuB21L",
+    database: "test",
+    port: 4000,
     ssl: {
         rejectUnauthorized: false
     }
 });
-
 db.connect(err => {
     if (err) {
         // This will print the username to the logs so we can see if it's actually working
@@ -54,6 +53,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
 
 
 
