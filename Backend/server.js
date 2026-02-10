@@ -1,13 +1,19 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const path = require('path'); // ADDED THIS
 require('dotenv').config();
 
 const app = express();
-app.use(cors({
-    origin: 'https://myportfolio-vfdu.onrender.com' 
-}));
+
+// 1. Updated CORS: Allows your Render URL and local testing
+app.use(cors()); 
+
 app.use(express.json());
+
+// 2. SERVE FRONTEND FILES: This tells the app where your HTML/CSS/JS are
+// It looks up one folder from 'Backend' to find your main files
+app.use(express.static(path.join(__dirname, '../')));
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -16,13 +22,18 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 4000,
     ssl: {
-        rejectUnauthorized: false // This allows the connection via Render's certificate
+        rejectUnauthorized: false
     }
 });
 
 db.connect(err => {
     if (err) console.error("Database connection failed:", err.stack);
-    else console.log("Connected to Database");
+    else console.log("✅ Connected to TiDB Database");
+});
+
+// 3. HOME ROUTE: This serves your website when you visit the main link
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.post('/api/contact', (req, res) => {
@@ -33,8 +44,8 @@ app.post('/api/contact', (req, res) => {
         res.status(200).json({ message: "Success!" });
     });
 });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
-
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
