@@ -27,8 +27,12 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-    if (err) console.error("Database connection failed:", err.stack);
-    else console.log("✅ Connected to TiDB Database");
+    if (err) {
+        console.error("❌ TiDB Connection Error:", err.message);
+        // The server will still run, but DB features won't work
+    } else {
+        console.log("✅ Connected to TiDB Database");
+    }
 });
 
 // 3. HOME ROUTE: This serves your website when you visit the main link
@@ -49,3 +53,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
