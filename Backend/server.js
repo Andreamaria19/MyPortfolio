@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/contact', (req, res) => {
     const { name, email, message } = req.body;
-    const sql = "INSERT INTO messages (name, email, message) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO myportfolio.messages (name, email, message) VALUES (?, ?, ?)";
     db.query(sql, [name, email, message], (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.status(200).json({ message: "Success!" });
@@ -53,6 +53,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
 
 
 
