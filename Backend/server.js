@@ -19,7 +19,7 @@ const db = mysql.createConnection({
     host: "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
     user: "34Z7u7R6aGsvz2W.root", 
     password: "41izUCOXmZOuB21L",
-    database: "test",
+    database: "myportfolio",
     port: 4000,
     ssl: {
         rejectUnauthorized: false
@@ -53,6 +53,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
 
 
 
