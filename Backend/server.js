@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../')));
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,      // <--- MUST use process.env
+    user: process.env.DB_USER,    // <--- MUST use process.env
     password: process.env.DB_PASS,  // <--- MUST use process.env
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 4000,
@@ -53,5 +53,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
 });
+
 
 
