@@ -12,7 +12,22 @@ img {
     vertical-align: middle;
     border-style: none;
 }
-
+.about-section {
+    padding: 80px 10%;
+    display: flex;         
+    align-items: center;    
+    gap: 50px;              
+    flex-wrap: wrap;        
+    justify-content: center;
+}
+.about-content {
+    flex: 1;                
+    min-width: 300px;  
+    @media (max-width: 768px) {
+    .about-section {
+        text-align: center;
+    }
+}
 #starsLeft {
     position: absolute;
     left: 0;
